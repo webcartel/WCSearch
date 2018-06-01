@@ -1,0 +1,12 @@
+$f1: 'Roboto', sans-serif;
+
+@mixin placeholder {
+	&::-webkit-input-placeholder { @content; }
+	&:-moz-placeholder           { @content; }
+	&::-moz-placeholder          { @content; }
+	&:-ms-input-placeholder      { @content; }  
+}
+
+#wcsearch-user {
+	
+}
