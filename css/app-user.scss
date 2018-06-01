@@ -4,9 +4,56 @@ $f1: 'Roboto', sans-serif;
 	&::-webkit-input-placeholder { @content; }
 	&:-moz-placeholder           { @content; }
 	&::-moz-placeholder          { @content; }
-	&:-ms-input-placeholder      { @content; }  
+	&:-ms-input-placeholder      { @content; }
 }
 
 #wcsearch-user {
-	
+	position: fixed;
+	top: 100vh;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0,0,0,0.86);
+	z-index: 9999999;
+	transition: top cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.25s;
+
+	&.active {
+		top: 0vh;
+	}
+
+	.search-window-cloce {
+		position: absolute;
+		top: 16px;
+		right: 16px;
+		width: 40px;
+		height: 40px;
+		cursor: pointer;
+		transition: transform cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.3s;
+
+		&:hover {
+			transform: rotate(180deg);
+		}
+
+		&:before {
+			content: '';
+			position: absolute;
+			top: 19px;
+			left: 0;
+			height: 2px;
+			width: 100%;
+			background: #fff;
+			transform: rotate(45deg);
+		}
+
+		&:after {
+			content: '';
+			position: absolute;
+			top: 19px;
+			left: 0;
+			height: 2px;
+			width: 100%;
+			background: #fff;
+			transform: rotate(-45deg);
+		}
+	}
 }
