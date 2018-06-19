@@ -13,7 +13,8 @@ var wcsearchUser = new Vue({
 	el: '#wcsearch-user',
 
 	data: {
-
+		query: null,
+		results: null,
 	},
 
 	mounted: function() {
@@ -21,6 +22,16 @@ var wcsearchUser = new Vue({
 	},
 
 	methods: {
-		
+		getResults() {
+			var params = new URLSearchParams()
+			params.append('query', this.query)
+			axios.post(wcsearch_ajax.url + '?action=get_search_results', params)
+			.then(function (response) {
+				this.results = response.data
+			}.bind(this))
+			.catch(function (error) {
+				console.log(error)
+			})
+		},
 	},
 })
