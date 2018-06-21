@@ -78,4 +78,7 @@
       #wcsearch-user .search-form-block .search-btn svg {
         fill: #6D8491; }
   #wcsearch-user .search-results-block {
-    background: #fff; }
+    margin: -1px auto 0 auto;
+    max-width: 800px;
+    background: #fff;
+    border-top: 4px solid #6d8491; }

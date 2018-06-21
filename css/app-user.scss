@@ -104,6 +104,9 @@ $f1: 'Roboto', sans-serif;
 	}
 
 	.search-results-block {
+		margin: -1px auto 0 auto;
+		max-width: 800px;
 		background: #fff;
+		border-top: 4px solid #6d8491;
 	}
 }

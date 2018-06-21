@@ -43,8 +43,8 @@ function wcsearch_html() {
 			</svg>
 		</button>
 	</div>
-	<div class="search-results-block">
-		<div class="search-item" v-for="result in results">
+	<div class="search-results-block" v-if="results != null">
+		<div class="search-item" v-for="result in results" @click="goTo(result.url)">
 			{{ result.word }}
 		</div>
 	</div>
@@ -56,12 +56,17 @@ function wcsearch_html() {
 
 function get_search_results()
 {
-	global $wpdb;
-	$wcsearch_index_table = $wpdb->get_blog_prefix() . WCSEARCH_INDEX_TABLE_NAME;
-	$sql = "SELECT * FROM $wcsearch_index_table WHERE word LIKE '%".$_POST['query']."%'";
-	$responce = $wpdb->get_results( $sql, ARRAY_A );
-	echo json_encode($responce);
-	exit();
+	if ( $_POST['query'] != '' ) {
+		global $wpdb;
+		$wcsearch_index_table = $wpdb->get_blog_prefix() . WCSEARCH_INDEX_TABLE_NAME;
+		$sql = "SELECT * FROM $wcsearch_index_table WHERE word LIKE '%".$_POST['query']."%' ORDER BY `weight` DESC";
+		$responce = $wpdb->get_results( $sql, ARRAY_A );
+		foreach ($responce as $item) {
+			$results[] = array('word' => $item['word'], 'url' => get_permalink($item['post_id']), 'post_id' => $item['post_id']);
+		}
+		echo json_encode($results);
+		exit();
+	}
 }
 add_action( 'wp_ajax_get_search_results', 'get_search_results' );
 add_action( 'wp_ajax_nopriv_get_search_results', 'get_search_results' );
